@@ -28,6 +28,14 @@ def startbttl(pokemon, pk_bot):
         return pk_bot.name
 
 
+def acerto():
+    # 1 = Acertou! | 2 = Crítico! | 3 = Errou!
+    chances = [1, 2, 3]
+    probs = [0.8, 0.1, 0.1]
+
+    return random.choices(chances, weights=probs, k=1)[0]
+
+
 def fight(pokemon, pk_bot):
     print(f"""
     ================== BATTLE ==================
