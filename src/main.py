@@ -1,21 +1,19 @@
-import sys
 import time
 import random
+import inquirer
+from functions import start_battle, print_delay, attacking
 from pokemons import PokemonWater, PokemonGrass, PokemonFire, Pokemon, Rowlet, Popplio, Litten
 
 
-# Calcs = {
-#     'EV': 5,
-#     'IV': 15,
-#     'Damage': (((2 * self.lv + 10) / 100) * (attack / bot.defense) * (self.power + 2) x mod_tipo,
-#     'Attack': self.atk_base + ((((2 * self.atk_base + ev / 4 + iv / 4) * self.lvl) / 100 + 5) * mod_tipo)
-# }
 
-def print_delay(chr):
-    for wrt in chr:
-        sys.stdout.write(chr)
-        sys.stdout.flush()
-        time.sleep(0.05)
+
+
+def start_game():
+    print("{:^30}".format("POKEMON BATTLE"))
+
+
+def choose_poke():
+    pass
 
 
 def fight(pokemon, pk_bot):
@@ -28,5 +26,43 @@ def fight(pokemon, pk_bot):
 
     time.sleep(2)
 
-    while pokemon.hp > 0 and pk_bot > 0:
-        pass
+    while pokemon.hp > 0 and pk_bot.hp > 0:
+        start_battle(pokemon, pk_bot)
+        if start_battle == pokemon.name:
+            print(f'{pokemon.name}\t\tHP {pokemon.show_health()}')
+            print(f'{pk_bot.name}\t\tHP {pk_bot.name}')
+
+            import inquirer
+            questions = [
+                inquirer.List('pokedo',
+                              message=f"\nWhat will {pokemon.name} do?",
+                              choices=['Fight', 'Run'],
+                              ),
+            ]
+            actiondo = inquirer.prompt(questions)
+            if actiondo == 'Fight':
+                questions = [
+                    inquirer.List('atkdo',
+                                  message=f"\nChoose the move?",
+                                  choices=[f'{pokemon.movname}', 'Back'],
+                                  ),
+                ]
+                movedo = inquirer.prompt(questions)
+                if movedo == f'{pokemon.movname}':
+                    damage = attacking(pokemon, pk_bot)[0]
+                    effect = attacking(pokemon, pk_bot)[1]
+
+                    pk_bot.hp_loss(damage[0])
+                    print_delay(damage[1])
+                    print_delay(f"{pk_bot.name} perdeu {damage:.2f} de vida")
+                else:
+                    break
+            else:
+                break
+
+# damage = Litten.damage(Rowlet, Litten.mod_tipo(Rowlet))
+# Rowlet.hp_loss(damage[0])
+# print_delay(damage[1])
+# print_delay(f"Rowlet perdeu {damage[0]:.2f} de vida")
+# print(Rowlet.show_health())
+start_game()

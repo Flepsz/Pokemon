@@ -38,10 +38,18 @@ class Pokemon:
         return self.attack
 
     def calc_def(self):
+        """
+        Calcula o stats de defesa do pokemon de acordo com sua defesa base e nível.
+        :return: Status de defesa.
+        """
         self.defense = self.defense + (((2 * self.defense + 15 + (self.lvl / 4)) * self.lvl) / 100) + 5
         return self.defense
 
     def calc_speed(self):
+        """
+        Calcula o stats de velocidade do pokemon de acordo com sua velocidade base e nível.
+        :return: Status de velocidade.
+        """
         self.speed = self.speed + (((2 * self.speed + 15 + (self.lvl / 4)) * self.lvl) / 100) + 5
         return self.speed
 
@@ -82,10 +90,18 @@ class Pokemon:
             return damage, msg
 
     def hp_loss(self, dmg):
+        """
+        Computa a perda de vida do pokemon.
+        :param dmg: Dano recebido.
+        :return: Vida com o dano recebido.
+        """
         self.hp -= dmg
         return self.hp
 
     def show_health(self):
+        """
+        Mostra a vida em barras dinamicamente.
+        """
         dash_convert = int(self.hpmax / 20)
         current_dashes = int(self.hp / dash_convert)
         remaining_health = 20 - current_dashes
@@ -93,7 +109,7 @@ class Pokemon:
         health_display = '=' * current_dashes
         remaining_display = ' ' * remaining_health
 
-        print("|" + health_display + remaining_display + '|')
+        return health_display + remaining_display
 
 
 class PokemonFire(Pokemon):
@@ -201,7 +217,6 @@ class PokemonWater(Pokemon):
             return self.effect, pk_bot.effect
 
 
-Litten = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, {'LVL': 5, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70})
+Litten = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, {'LVL': 10, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70})
 Rowlet = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 5, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
 Popplio = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, {'LVL': 5, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40})
-
