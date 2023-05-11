@@ -55,9 +55,9 @@ def test(pokemon, pk_bot, damage, effect):
     print(pk_bot.show_health())
 
 
-damage = attacking(Litten, Rowlet)[0]
-effect = attacking(Litten, Rowlet)[1]
-
-test(Litten, Rowlet, damage, effect)
-test(Litten, Rowlet, damage, effect)
+# damage = attacking(Litten, Rowlet)[0]
+# effect = attacking(Litten, Rowlet)[1]
+# print(Rowlet.show_health())
+# test(Litten, Rowlet, damage, effect)
+# test(Litten, Rowlet, damage, effect)
 
