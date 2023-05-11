@@ -16,9 +16,3 @@ def start_battle(pokemon, pk_bot):
     else:
         return pk_bot.name
 
-
-print(Litten.show_stats())
-print(Litten.mod_tipo(Rowlet))
-
-print(Litten.damage(Rowlet, Litten.mod_tipo(Rowlet)))
-print("lerolero")

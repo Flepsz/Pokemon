@@ -117,8 +117,6 @@ class PokemonFire(Pokemon):
             return self.effect, pk_bot.effect
 
         elif pk_bot.type == "Grass":
-            self.attack *= 1.5
-            self.defense *= 1.5
             pk_bot.attack /= 1.5
             pk_bot.defense /= 1.5
             self.effect = 'Its super effective!'
@@ -128,8 +126,6 @@ class PokemonFire(Pokemon):
         else:
             self.attack /= 1.5
             self.defense /= 1.5
-            pk_bot.attack *= 1.5
-            pk_bot.defense *= 1.5
             self.effect = 'Its not very effective...'
             pk_bot.effect = 'Its super effective!'
             return self.effect, pk_bot.effect
@@ -156,8 +152,6 @@ class PokemonGrass(Pokemon):
             return self.effect, pk_bot.effect
 
         elif pk_bot.type == "Water":
-            self.attack *= 1.5
-            self.defense *= 1.5
             pk_bot.attack /= 1.5
             pk_bot.defense /= 1.5
             self.effect = 'Its super effective!'
@@ -167,8 +161,6 @@ class PokemonGrass(Pokemon):
         else:
             self.attack /= 1.5
             self.defense /= 1.5
-            pk_bot.attack *= 1.5
-            pk_bot.defense *= 1.5
             self.effect = 'Its not very effective...'
             pk_bot.effect = 'Its super effective!'
             return self.effect, pk_bot.effect
@@ -195,8 +187,6 @@ class PokemonWater(Pokemon):
             return self.effect, pk_bot.effect
 
         elif pk_bot.type == "Fire":
-            self.attack *= 1.5
-            self.defense *= 1.5
             pk_bot.attack /= 1.5
             pk_bot.defense /= 1.5
             self.effect = 'Its super effective!'
@@ -206,16 +196,12 @@ class PokemonWater(Pokemon):
         else:
             self.attack /= 1.5
             self.defense /= 1.5
-            pk_bot.attack *= 1.5
-            pk_bot.defense *= 1.5
             self.effect = 'Its not very effective...'
             pk_bot.effect = 'Its super effective!'
             return self.effect, pk_bot.effect
 
 
 Litten = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, {'LVL': 5, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70})
-Rowlet = PokemonWater('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 5, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
+Rowlet = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 5, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
 Popplio = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, {'LVL': 5, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40})
-Litten.calc_atk()
-Rowlet.calc_atk()
-Popplio.calc_atk()
+
