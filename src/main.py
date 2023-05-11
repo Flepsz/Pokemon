@@ -21,15 +21,14 @@ def fight(pokemon, pk_bot):
       TYPE: {pokemon.type}                    TYPE: {pk_bot.type}
     """)
 
-    time.sleep(2)
+    # time.sleep(2)
 
     while pokemon.hp > 0 and pk_bot.hp > 0:
-        start_battle(pokemon, pk_bot)
-        if start_battle == pokemon.name:
+        start_battle = 'f'
+        if start_battle == 'f':
             print(f'{pokemon.name}\t\tHP {pokemon.show_health()}')
             print(f'{pk_bot.name}\t\tHP {pk_bot.name}')
 
-            import inquirer
             questions = [
                 inquirer.List('pokedo',
                               message=f"\nWhat will {pokemon.name} do?",
@@ -37,6 +36,7 @@ def fight(pokemon, pk_bot):
                               ),
             ]
             actiondo = inquirer.prompt(questions)
+            print(actiondo[0])
             if actiondo == 'Fight':
                 questions = [
                     inquirer.List('atkdo',
@@ -51,7 +51,7 @@ def fight(pokemon, pk_bot):
 
                     pk_bot.hp_loss(damage[0])
                     print_delay(damage[1])
-                    print_delay(f"{pk_bot.name} perdeu {damage:.2f} de vida")
+                    print_delay(f"{pk_bot.name} loss {damage:.2f} of health.")
                 else:
                     break
 
@@ -61,8 +61,7 @@ def fight(pokemon, pk_bot):
                 
                 pokemon.hp_loss(damage1)
                 print_delay(damage[1])
-                print_delay(f"{pokemon.name} perdeu {damage:.2f} de vida")
-                
+                print_delay(f"{pokemon.name} loss {damage:.2f} of health.")
 
             else:
                 break
@@ -77,3 +76,5 @@ def fight(pokemon, pk_bot):
 # print_delay(f"Rowlet perdeu {damage[0]:.2f} de vida")
 # print(Rowlet.show_health())
 start_game()
+
+fight(Litten, Rowlet)
