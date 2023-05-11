@@ -5,9 +5,6 @@ from functions import start_battle, print_delay, attacking
 from pokemons import PokemonWater, PokemonGrass, PokemonFire, Pokemon, Rowlet, Popplio, Litten
 
 
-
-
-
 def start_game():
     print("{:^30}".format("POKEMON BATTLE"))
 
@@ -57,8 +54,22 @@ def fight(pokemon, pk_bot):
                     print_delay(f"{pk_bot.name} perdeu {damage:.2f} de vida")
                 else:
                     break
+
+                print_delay(f'{pk_bot.name} turns.')
+                damage1 = attacking(pk_bot, pokemon)[0]
+                effect1 = attacking(pk_bot, pokemon)[1]
+                
+                pokemon.hp_loss(damage1)
+                print_delay(damage[1])
+                print_delay(f"{pokemon.name} perdeu {damage:.2f} de vida")
+                
+
             else:
                 break
+
+        else:
+            print(f'{pokemon.name}\t\tHP {pokemon.show_health()}')
+            print(f'{pk_bot.name}\t\tHP {pk_bot.name}')
 
 # damage = Litten.damage(Rowlet, Litten.mod_tipo(Rowlet))
 # Rowlet.hp_loss(damage[0])
