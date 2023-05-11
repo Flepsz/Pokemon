@@ -1,15 +1,22 @@
 import random
 import sys
 import time
+import os
 from pokemons import PokemonWater, PokemonGrass, PokemonFire, Pokemon, Rowlet, Popplio, Litten
 
 
 def print_delay(s):
+    print()
     for c in s:
         sys.stdout.write(c)
         sys.stdout.flush()
         time.sleep(0.05)
     print()
+    time.sleep(1)
+
+
+def clear():
+    os.system('cls')
 
 
 def attacking(pokemon, pk_bot):
@@ -48,16 +55,20 @@ def start_battle(pokemon, pk_bot):
 # print(Rowlet.show_health())
 
 
-def test(pokemon, pk_bot, damage, effect):
+def hp_atk_taken(pokemon, pk_bot):
+    damage = attacking(pokemon, pk_bot)[0]
+    effect = attacking(pokemon, pk_bot)[1]
+    print("DANO: ", damage)
     pk_bot.hp_loss(damage)
-    print(effect)
-    print(f"{pk_bot.name} perdeu {damage:.2f} de vida")
-    print(pk_bot.show_health())
+    print_delay(effect)
+    if pk_bot.hp <= 0:
+        print_delay(f"Foe {pk_bot.name} fainted!")
+
 
 
 # damage = attacking(Litten, Rowlet)[0]
 # effect = attacking(Litten, Rowlet)[1]
-# print(Rowlet.show_health())
+# print(Rowlet.barra())
 # test(Litten, Rowlet, damage, effect)
 # test(Litten, Rowlet, damage, effect)
 

@@ -62,12 +62,22 @@ class Pokemon:
         self.hpmax = self.hp
         return self.hp, self.hpmax
 
+    def calc_xp(self, pk_bot):
+        """
+        Calcula o xp que o pokemon vai ganhar.
+        :param pk_bot: Pokemon inimigo para pegar seu nível.
+        :return: XP
+        """
+        xp = (1000 * pk_bot.lvl) / (7 * self.lvl)
+        return xp
+
     def damage(self, pk_bot, mod_tipo):
         """
         Calcula se o usuário acertou, crítico ou errou.
         Calcula o dano que o pokemon do usuário dará de acordo com seu nível, ataque, defesa do oponente,
         poder da habilidade e modificador de tipo.
-        1 = Acertou! | 2 = Crítico! | 3 = Errou!;
+
+        1 = Acertou! | 2 = Crítico! | 3 = Errou!
         :param pk_bot: Pokemon do bot.
         :param mod_tipo: Modificador de tipo.
         :return: Dano do pokemon e mensagem.
@@ -98,18 +108,36 @@ class Pokemon:
         self.hp -= dmg
         return self.hp
 
-    def show_health(self):
+    def bar_hp(self):
         """
         Mostra a vida em barras dinamicamente.
         """
-        dash_convert = int(self.hpmax / 20)
-        current_dashes = int(self.hp / dash_convert)
-        remaining_health = 20 - current_dashes
+        bar_full = int((self.hp / self.hpmax) * 20)
+        bar_hp = (chr(0x2588) * bar_full)
+        bar_msng = chr(0x2591) * (20 - bar_full)
+        bar = bar_hp + bar_msng
+        return bar
 
-        health_display = '=' * current_dashes
-        remaining_display = ' ' * remaining_health
 
-        return health_display + remaining_display
+    @staticmethod
+    def kill(pk_bot):
+        if pk_bot.hp <= 0:
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def run():
+        """
+        Função que marca a probabilidade do jogador fugir da batalha.
+        0 = Ficou | 1 = Fugiu
+        :return:
+        """
+        chances = [0, 1]
+        probs = [0.5, 0.5]
+
+        run = random.choices(chances, weights=probs, k=1)[0]
+        return run
 
 
 class PokemonFire(Pokemon):
