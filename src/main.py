@@ -62,15 +62,15 @@ def start_game():
 
 
 def fight(pokemon, pk_bot, btname, name):
-    # print_delay(f"{btname} wants to fight!")
-    # time.sleep(1)
-    # clear()
-    # print_delay(f"{btname} sent out {pk_bot.name}")
-    # clear()
-    # print_delay(f"Go! {pokemon.name}!")
-    # clear()
-    #
-    # time.sleep(2)
+    print_delay(f"{btname} wants to fight!")
+    time.sleep(1)
+    clear()
+    print_delay(f"{btname} sent out {pk_bot.name}")
+    clear()
+    print_delay(f"Go! {pokemon.name}!")
+    clear()
+
+    time.sleep(2)
     pokemon.mod_stats(pk_bot)
 
     while pokemon.hp > 0 and pk_bot.hp > 0:
@@ -223,9 +223,9 @@ def fight(pokemon, pk_bot, btname, name):
                         return player
 
 
-# poke, rival, myname = start_game()
-poke = Popplio
-rival = 'beck'
-myname = 'raphinha'
+poke, rival, myname = start_game()
+# poke = Popplio
+# rival = 'beck'
+# myname = 'raphinha'
 
 fight(poke, bot_poke(), rival, myname)
