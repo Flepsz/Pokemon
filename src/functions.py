@@ -27,7 +27,7 @@ def print_delay(s):
     for c in s:
         sys.stdout.write(c)
         sys.stdout.flush()
-        time.sleep(0.02)
+        time.sleep(0.05)
     print()
     time.sleep(1)
 
