@@ -1,6 +1,6 @@
 import time
 import inquirer
-from functions import clear, print_delay, hp_atk_taken, bot_poke, start_battle, wait, Color
+from functions import clear, print_delay, hp_atk_taken, bot_poke, start_battle, wait, Color, show_health
 from pokemons import Rowlet, Popplio, Litten
 
 
@@ -18,16 +18,10 @@ def start_game():
     myname = input("Name: ").title()
     print_delay(f"Your name is {myname}.")
     clear()
-    print_delay("Let's choose your pokemon!")
-    clear()
+    print_delay("Let's choose your pokemon!\n")
 
-    questions = [
-        inquirer.List('pokemon',
-                      message=f"Which pokemon do you want?",
-                      choices=[Litten.name, Rowlet.name, Popplio.name],
-                      ),
-    ]
-    pokemonsl = inquirer.prompt(questions)
+    pokemonsl = inquirer.prompt(
+        [inquirer.List('pokemon', message=f"Which pokemon do you want?", choices=[Litten.name, Rowlet.name, Popplio.name])])
 
     print_delay(f"The pokemon that you choose was {pokemonsl['pokemon']}!")
     print_delay("Nice choice!")
@@ -58,33 +52,45 @@ def start_game():
     clear()
     print_delay("...")
     clear()
-    return poke, rival, myname
+
+    lvlchange = inquirer.prompt(
+        [inquirer.List('lvl', message=f"Before start the battle, do you want to choose the level of pokemons?",
+                       choices=['Yes', 'No'])])
+    if lvlchange['lvl'] == 'Yes':
+        lvl = int(input(f"Type the level of your {poke.name}: "))
+        poke.change_lvl(lvl)
+        lvlbt = int(input(f"Now, type the level of enemy pokemon: "))
+    else:
+        lvlbt = 5
+
+    clear()
+    return poke, rival, myname, lvlbt
 
 
-def fight(pokemon, pk_bot, btname, name):
-    print_delay(f"{btname} wants to fight!")
-    time.sleep(1)
-    clear()
-    print_delay(f"{btname} sent out {pk_bot.name}")
-    clear()
-    print_delay(f"Go! {pokemon.name}!")
-    clear()
+def fight(pokemon, pk_bot, btname, name, lvlbot):
+    # print_delay(f"{btname} wants to fight!")
+    # time.sleep(1)
+    # clear()
+    # print_delay(f"{btname} sent out {pk_bot.name}")
+    # clear()
+    # print_delay(f"Go! {pokemon.name}!")
+    # clear()
 
     time.sleep(2)
+    pk_bot.change_lvl(lvlbot)
     pokemon.mod_stats(pk_bot)
 
     while pokemon.hp > 0 and pk_bot.hp > 0:
         if start_battle(pokemon, pk_bot) == pokemon.name:
-            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
-            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}\n')
+            show_health(pokemon, pk_bot)
+            print()
 
             actiondo = inquirer.prompt(
                 [inquirer.List('pokedo', message=f"What will {pokemon.name} do?", choices=['Fight', 'Run'])])
 
             clear()
 
-            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
-            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}')
+            show_health(pokemon, pk_bot)
 
             if actiondo['pokedo'] == 'Fight':
                 print()
@@ -112,9 +118,10 @@ def fight(pokemon, pk_bot, btname, name):
                         break
                 else:
                     continue
+
                 clear()
-                print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
-                print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}')
+                show_health(pokemon, pk_bot)
+
                 print_delay(f'{pk_bot.name} turns.')
                 time.sleep(1)
                 clear()
@@ -148,8 +155,9 @@ def fight(pokemon, pk_bot, btname, name):
             if player == 1:
                 break
             else:
-                print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
-                print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}\n')
+                show_health(pokemon, pk_bot)
+                print()
+
                 time.sleep(1)
                 print_delay(f'{pk_bot.name} turns.')
                 time.sleep(1)
@@ -173,16 +181,15 @@ def fight(pokemon, pk_bot, btname, name):
                     player = 2
 
             while player == 2:
-                print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
-                print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}\n')
+                show_health(pokemon, pk_bot)
+                print()
 
                 actiondo = inquirer.prompt(
                     [inquirer.List('pokedo', message=f"What will {pokemon.name} do?", choices=['Fight', 'Run'])])
 
                 clear()
 
-                print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
-                print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}')
+                show_health(pokemon, pk_bot)
 
                 if actiondo['pokedo'] == 'Fight':
                     print()
@@ -225,9 +232,10 @@ def fight(pokemon, pk_bot, btname, name):
                         return player
 
 
-pokem, rivals, mynames = start_game()
+pokem, rivals, mynames, lvlbot = start_game()
 # pokem = Litten
-# rivals = 'beck'
-# mynames = 'raphinha'
+# rivals = 'Beck'
+# mynames = 'Raphinha'
+# lvlbot = 20
 
-fight(pokem, bot_poke(), rivals, mynames)
+fight(pokem, bot_poke(), rivals, mynames, lvlbot)
