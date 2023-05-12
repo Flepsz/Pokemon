@@ -113,6 +113,8 @@ def fight(pokemon, pk_bot, btname, name):
                 else:
                     continue
                 clear()
+                print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
+                print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}')
                 print_delay(f'{pk_bot.name} turns.')
                 time.sleep(1)
                 clear()
@@ -123,7 +125,7 @@ def fight(pokemon, pk_bot, btname, name):
 
                 if pk_bot.kill(pokemon):
                     clear()
-                    print_delay(f"{rival}: LOSER!")
+                    print_delay(f"{rivals}: LOSER!")
                     clear()
                     print_delay("...")
                     clear()
@@ -159,7 +161,7 @@ def fight(pokemon, pk_bot, btname, name):
 
                 if pk_bot.kill(pokemon):
                     clear()
-                    print_delay(f"{rival}: LOSER!")
+                    print_delay(f"{rivals}: LOSER!")
                     clear()
                     print_delay("...")
                     clear()
@@ -223,9 +225,9 @@ def fight(pokemon, pk_bot, btname, name):
                         return player
 
 
-poke, rival, myname = start_game()
-# poke = Popplio
-# rival = 'beck'
-# myname = 'raphinha'
+pokem, rivals, mynames = start_game()
+# pokem = Litten
+# rivals = 'beck'
+# mynames = 'raphinha'
 
-fight(poke, bot_poke(), rival, myname)
+fight(pokem, bot_poke(), rivals, mynames)
