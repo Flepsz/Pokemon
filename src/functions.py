@@ -77,3 +77,4 @@ def hp_atk_taken(pokemon, pk_bot):
     print_delay(effect)
     if pk_bot.hp <= 0:
         print_delay(f"Foe {pk_bot.name} fainted!")
+
