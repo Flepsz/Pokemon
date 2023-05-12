@@ -27,7 +27,7 @@ def print_delay(s):
     for c in s:
         sys.stdout.write(c)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.01)
     print()
     time.sleep(1)
 
@@ -78,3 +78,8 @@ def hp_atk_taken(pokemon, pk_bot):
     if pk_bot.hp <= 0:
         print_delay(f"Foe {pk_bot.name} fainted!")
 
+
+def show_health(pokemon, pk_bot):
+    print(
+        f'\n\t{Color.PURPLE}{pokemon.name}{Color.R}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
+    print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}')
