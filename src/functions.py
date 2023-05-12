@@ -2,7 +2,7 @@ import random
 import sys
 import time
 import os
-from pokemons import PokemonWater, PokemonGrass, PokemonFire, Pokemon, Rowlet, Popplio, Litten
+from pokemons import Rowlet, Popplio, Litten
 
 
 def print_delay(s):
@@ -19,9 +19,12 @@ def clear():
     os.system('cls')
 
 
+def mod_func(pokemon, pk_bot):
+    return pokemon.mod_tipo(pk_bot)
+
+
 def attacking(pokemon, pk_bot):
-    pokemon.mod_tipo(pk_bot)
-    return pokemon.damage(pk_bot, pokemon.mod_tipo(pk_bot))
+    return pokemon.damage(pk_bot, mod_func(pokemon, pk_bot))
 
 
 def start_battle(pokemon, pk_bot):
@@ -39,36 +42,18 @@ def start_battle(pokemon, pk_bot):
         return pk_bot.name
 
 
-# print(Litten.show_stats())
-# print(Litten.mod_tipo(Rowlet))
-# print("lol")
-# damage = Litten.damage(Rowlet, Litten.mod_tipo(Rowlet))
-# Rowlet.hp_loss(damage[0])
-# print(damage[1])
-# print(f"Rowlet perdeu {damage[0]:.2f} de vida")
-# print(Rowlet.show_health())
-#
-# damage = Litten.damage(Rowlet, Litten.mod_tipo(Rowlet))
-# Rowlet.hp_loss(damage[0])
-# print(damage[1])
-# print(f"Rowlet perdeu {damage[0]:.2f} de vida")
-# print(Rowlet.show_health())
+def bot_poke():
+    pokes = [Litten, Rowlet, Popplio]
+    poke_bot = random.choice(pokes)
+    return poke_bot
 
 
 def hp_atk_taken(pokemon, pk_bot):
-    damage = attacking(pokemon, pk_bot)[0]
-    effect = attacking(pokemon, pk_bot)[1]
+    dmgf = attacking(pokemon, pk_bot)
+    damage = dmgf[0]
+    effect = dmgf[1]
     print("DANO: ", damage)
     pk_bot.hp_loss(damage)
     print_delay(effect)
     if pk_bot.hp <= 0:
         print_delay(f"Foe {pk_bot.name} fainted!")
-
-
-
-# damage = attacking(Litten, Rowlet)[0]
-# effect = attacking(Litten, Rowlet)[1]
-# print(Rowlet.barra())
-# test(Litten, Rowlet, damage, effect)
-# test(Litten, Rowlet, damage, effect)
-
