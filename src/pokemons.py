@@ -274,3 +274,7 @@ class PokemonWater(Pokemon):
 Litten = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, {'LVL': 5, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70})
 Rowlet = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 50, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
 Popplio = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, {'LVL': 50, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40})
+
+Littenbot = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, {'LVL': 5, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70})
+Rowletbot = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 50, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
+Poppliobot = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, {'LVL': 50, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40})

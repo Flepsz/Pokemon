@@ -3,7 +3,23 @@ import sys
 import time
 import os
 import msvcrt as m
-from pokemons import Rowlet, Popplio, Litten
+from pokemons import Rowletbot, Poppliobot, Littenbot
+
+
+class Color:
+    """
+    Cores ASCII
+    """
+    PURPLE = '\033[95m'
+    CYAN = '\033[96m'
+    DARKCYAN = '\033[36m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    R = '\33[m'
 
 
 def print_delay(s):
@@ -48,7 +64,7 @@ def start_battle(pokemon, pk_bot):
 
 
 def bot_poke():
-    pokes = [Litten, Rowlet, Popplio]
+    pokes = [Littenbot, Rowletbot, Poppliobot]
     poke_bot = random.choice(pokes)
     return poke_bot
 
@@ -57,7 +73,6 @@ def hp_atk_taken(pokemon, pk_bot):
     dmgf = attacking(pokemon, pk_bot)
     damage = dmgf[0]
     effect = dmgf[1]
-    print("DANO: ", damage)
     pk_bot.hp_loss(damage)
     print_delay(effect)
     if pk_bot.hp <= 0:

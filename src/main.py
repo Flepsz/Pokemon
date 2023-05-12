@@ -1,6 +1,6 @@
 import time
 import inquirer
-from functions import clear, print_delay, hp_atk_taken, bot_poke, start_battle, wait
+from functions import clear, print_delay, hp_atk_taken, bot_poke, start_battle, wait, Color
 from pokemons import Rowlet, Popplio, Litten
 
 
@@ -8,14 +8,16 @@ def start_game():
     clear()
     print_delay("{:^30}".format("POKEMON"))
     print_delay("Welcome to the POKEMON world!")
-    print_delay(input("Press ENTER to continue!"))
-    time.sleep(1)
+    print_delay(input("Press ENTER to continue!\n"))
+    wait()
     clear()
     print_delay("Let's start!")
     time.sleep(1)
     clear()
     print_delay("What is your name?")
     myname = input("Name: ")
+    print_delay(f"Your name is {myname}.")
+    clear()
     print_delay("Let's choose your pokemon!")
     clear()
 
@@ -75,8 +77,8 @@ def fight(pokemon, pk_bot, btname, name):
         start_battle(pokemon, pk_bot)
         if start_battle == 'f':
 
-            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {pokemon.bar_hp()}\n')
-            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {pk_bot.bar_hp()}\n')
+            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
+            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}\n')
 
             questions = [
                 inquirer.List('pokedo',
@@ -88,8 +90,8 @@ def fight(pokemon, pk_bot, btname, name):
 
             clear()
 
-            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {pokemon.bar_hp()}\n')
-            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {pk_bot.bar_hp()}')
+            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
+            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}\n')
 
             if actiondo['pokedo'] == 'Fight':
                 print()
@@ -150,8 +152,8 @@ def fight(pokemon, pk_bot, btname, name):
                     break
 
         else:
-            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {pokemon.bar_hp()}\n')
-            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {pk_bot.bar_hp()}\n')
+            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
+            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}\n')
             time.sleep(1)
             print_delay(f'{pk_bot.name} turns.')
             time.sleep(1)
@@ -172,8 +174,8 @@ def fight(pokemon, pk_bot, btname, name):
                 print_delay("Try again later...")
                 break
 
-            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {pokemon.bar_hp()}\n')
-            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {pk_bot.bar_hp()}\n')
+            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
+            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}\n')
 
             questions = [
                 inquirer.List('pokedo',
@@ -185,8 +187,8 @@ def fight(pokemon, pk_bot, btname, name):
 
             clear()
 
-            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {pokemon.bar_hp()}\n')
-            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {pk_bot.bar_hp()}')
+            print(f'\n\t{pokemon.name}\tLVL. {pokemon.lvl}\n\tHP {Color.GREEN}{pokemon.bar_hp()}{Color.R}\n')
+            print(f'\t{pk_bot.name}\tLVL. {pk_bot.lvl}\n\tHP {Color.GREEN}{pk_bot.bar_hp()}{Color.R}\n')
 
             if actiondo['pokedo'] == 'Fight':
                 print()
