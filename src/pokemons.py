@@ -120,7 +120,6 @@ class Pokemon:
         bar = bar_hp + bar_msng
         return bar
 
-
     @staticmethod
     def kill(pk_bot):
         """
@@ -144,6 +143,10 @@ class Pokemon:
         run = random.choices(chances, weights=probs, k=1)[0]
         return run
 
+    def change_lvl(self, lvl):
+        self.lvl = lvl
+        return self.lvl
+
 
 class PokemonFire(Pokemon):
     """
@@ -156,12 +159,12 @@ class PokemonFire(Pokemon):
 
     def mod_stats(self, pk_bot):
         if pk_bot.type == "Grass":
-            pk_bot.attack /= 1.5
-            pk_bot.defense /= 1.5
+            pk_bot.attack /= 2
+            pk_bot.defense /= 2
 
         elif pk_bot.type == "Water":
-            self.attack /= 1.5
-            self.defense /= 1.5
+            self.attack /= 2
+            self.defense /= 2
         else:
             pass
 
@@ -198,12 +201,12 @@ class PokemonGrass(Pokemon):
 
     def mod_stats(self, pk_bot):
         if pk_bot.type == "Water":
-            pk_bot.attack /= 1.5
-            pk_bot.defense /= 1.5
+            pk_bot.attack /= 2
+            pk_bot.defense /= 2
 
         elif pk_bot.type == "Fire":
-            self.attack /= 1.5
-            self.defense /= 1.5
+            self.attack /= 2
+            self.defense /= 2
         else:
             pass
 
@@ -240,12 +243,12 @@ class PokemonWater(Pokemon):
 
     def mod_stats(self, pk_bot):
         if pk_bot.type == "Fire":
-            pk_bot.attack /= 1.5
-            pk_bot.defense /= 1.5
+            pk_bot.attack /= 2
+            pk_bot.defense /= 2
 
         elif pk_bot.type == "Grass":
-            self.attack /= 1.5
-            self.defense /= 1.5
+            self.attack /= 2
+            self.defense /= 2
         else:
             pass
 
