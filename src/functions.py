@@ -2,6 +2,7 @@ import random
 import sys
 import time
 import os
+import msvcrt as m
 from pokemons import Rowlet, Popplio, Litten
 
 
@@ -13,6 +14,10 @@ def print_delay(s):
         time.sleep(0.05)
     print()
     time.sleep(1)
+
+
+def wait():
+    m.getch()
 
 
 def clear():

@@ -3,7 +3,9 @@ import random
 
 class Pokemon:
     """
-    Classe principal da construção do pokemon.
+    Essa classe cria um objeto de pokémon para o jogo. Ela inclui métodos para calcular o ataque, defesa, velocidade,
+    vida e xp de um pokémon, além de métodos para calcular o dano causado, calcular a perda de hp, calcular a barra
+    de saúde do pokémon e determinar se o pokémon foi morto ou não.
     """
     def __init__(self, name, move, stats):
         self.name = name
@@ -121,6 +123,9 @@ class Pokemon:
 
     @staticmethod
     def kill(pk_bot):
+        """
+        Verifica se o pokemon foi morto ou não.
+        """
         if pk_bot.hp <= 0:
             return True
         else:
@@ -267,5 +272,5 @@ class PokemonWater(Pokemon):
 
 
 Litten = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, {'LVL': 5, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70})
-Rowlet = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 5, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
-Popplio = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, {'LVL': 5, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40})
+Rowlet = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 50, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
+Popplio = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, {'LVL': 50, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40})
