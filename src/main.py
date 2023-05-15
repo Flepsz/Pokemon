@@ -1,6 +1,6 @@
 import time
 import inquirer
-from functions import clear, print_delay, hp_atk_taken, bot_poke, start_battle, wait, Color, show_health
+from functions import clear, print_delay, hp_atk_taken, bot_poke, start_battle, wait, Color, show_health, print_delay_clr
 from pokemons import Rowlet, Popplio, Litten
 
 
@@ -15,66 +15,54 @@ def start_game():
     time.sleep(1)
     clear()
     print_delay("What is your name?")
-    myname = input("Name: ").title()
-    print_delay(f"Your name is {myname}.")
-    clear()
+    player_name = input("Name: ").title()
+    print_delay_clr(f"Your name is {player_name}.")
     print_delay("Let's choose your pokemon!\n")
-
-    pokemonsl = inquirer.prompt(
-        [inquirer.List('pokemon', message=f"Which pokemon do you want?", choices=[Litten.name, Rowlet.name, Popplio.name])])
-
-    print_delay(f"The pokemon that you choose was {pokemonsl['pokemon']}!")
-    print_delay("Nice choice!")
-
-    if pokemonsl['pokemon'] == Litten.name:
-        poke = Litten
-    elif pokemonsl['pokemon'] == Rowlet.name:
-        poke = Rowlet
-    else:
-        poke = Popplio
-
-    clear()
-    print_delay("Now you need to say the name of your rival")
-    clear()
+    pokemons_list = [Litten.name, Rowlet.name, Popplio.name]
+    pokemons_choice = inquirer.prompt([inquirer.List('pokemon', message=f"Which pokemon do you want?", choices=pokemons_list)])
+    pokemon = get_pokemon(pokemons_choice['pokemon'])
+    print_delay(f"The pokemon that you choose was {pokemon.name}!")
+    print_delay_clr("Nice choice!")
+    print_delay_clr("Now you need to say the name of your rival")
     print_delay("What's the name of your rival?")
-    rival = input("Name: ").title()
-    print_delay(f"\nYour rival is {rival}")
-    clear()
-    print_delay("Now let's start the game!!")
-    clear()
-    print_delay(f"{rival}: Yo! {myname}!")
-    clear()
-    print_delay("You're still struggling along back here?")
-    clear()
-    print_delay("I'm doing great! I caught a bunch of strong and smart POKEMON!")
-    clear()
-    print_delay(f"Here, let me see what you caught, {myname}!")
-    clear()
-    print_delay("...")
-    clear()
+    rival_name = input("Name: ").title()
+    print_delay_clr(f"\nYour rival is {rival_name}")
+    print_delay_clr("Now let's start the game!!")
+    print_delay_clr(f"{rival_name}: Yo! {player_name}!")
+    print_delay_clr("You're still struggling along back here?")
+    print_delay_clr("I'm doing great! I caught a bunch of strong and smart POKEMON!")
+    print_delay_clr(f"Here, let me see what you caught, {player_name}!")
+    print_delay_clr("...")
+    lvl_change = inquirer.prompt([inquirer.List('lvl', message=f"Before start the battle, do you want to choose the level of pokemons?", choices=['Yes', 'No'])])
 
-    lvlchange = inquirer.prompt(
-        [inquirer.List('lvl', message=f"Before start the battle, do you want to choose the level of pokemons?",
-                       choices=['Yes', 'No'])])
-    if lvlchange['lvl'] == 'Yes':
-        lvl = int(input(f"Type the level of your {poke.name}: "))
-        poke.change_lvl(lvl)
-        lvlbt = int(input(f"Now, type the level of enemy pokemon: "))
+    if lvl_change['lvl'] == 'Yes':
+        pokemon_level = int(input(f"Type the level of your {pokemon.name}: "))
+        pokemon.change_lvl(pokemon_level)
+        enemy_level = int(input(f"Now, type the level of enemy pokemon: "))
     else:
-        lvlbt = 5
-
+        enemy_level = 5
     clear()
-    return poke, rival, myname, lvlbt
+
+    return pokemon, rival_name, player_name, enemy_level
+
+
+def get_pokemon(pokemon_name):
+    if pokemon_name == Litten.name:
+        return Litten
+    elif pokemon_name == Rowlet.name:
+        return Rowlet
+    else:
+        return Popplio
 
 
 def fight(pokemon, pk_bot, btname, name, lvlbot):
-    # print_delay(f"{btname} wants to fight!")
-    # time.sleep(1)
-    # clear()
-    # print_delay(f"{btname} sent out {pk_bot.name}")
-    # clear()
-    # print_delay(f"Go! {pokemon.name}!")
-    # clear()
+    print_delay(f"{btname} wants to fight!")
+    time.sleep(1)
+    clear()
+    print_delay(f"{btname} sent out {pk_bot.name}")
+    clear()
+    print_delay(f"Go! {pokemon.name}!")
+    clear()
 
     time.sleep(2)
     pk_bot.change_lvl(lvlbot)
@@ -236,6 +224,6 @@ pokem, rivals, mynames, lvlbot = start_game()
 # pokem = Litten
 # rivals = 'Beck'
 # mynames = 'Raphinha'
-# lvlbot = 20
+# lvlbot = 60
 
 fight(pokem, bot_poke(), rivals, mynames, lvlbot)
