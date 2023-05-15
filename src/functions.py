@@ -32,6 +32,17 @@ def print_delay(s):
     time.sleep(1)
 
 
+def print_delay_clr(s):
+    print()
+    for c in s:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    print()
+    time.sleep(1)
+    clear()
+
+
 def wait():
     m.getch()
 
