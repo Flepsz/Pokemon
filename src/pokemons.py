@@ -145,6 +145,10 @@ class Pokemon:
 
     def change_lvl(self, lvl):
         self.lvl = lvl
+        self.calc_atk()
+        self.calc_def()
+        self.calc_speed()
+        self.calc_hp()
         return self.lvl
 
 
