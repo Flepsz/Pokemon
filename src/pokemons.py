@@ -19,11 +19,6 @@ class Pokemon:
         self.defense = stats['Defense']
         self.speed = stats['Speed']
 
-        self.calc_atk()
-        self.calc_def()
-        self.calc_speed()
-        self.calc_hp()
-
     def show_stats(self):
         """
         Função para retornar todos os status do pokemon.
