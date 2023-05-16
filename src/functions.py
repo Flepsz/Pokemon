@@ -30,7 +30,7 @@ def print_delay(s):
     for c in s:
         sys.stdout.write(c)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     print()
     time.sleep(1)
 
@@ -43,7 +43,7 @@ def print_delay_clr(s):
     for c in s:
         sys.stdout.write(c)
         sys.stdout.flush()
-        time.sleep(0.01)
+        time.sleep(0.05)
     print()
     time.sleep(1)
     clear()
