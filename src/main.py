@@ -86,6 +86,7 @@ def fight(pokemon, pk_bot, rvlname, name, lvlbot):
     clear()
 
     time.sleep(2)
+    # pokemon.change_lvl(5)
     pk_bot.change_lvl(lvlbot)
     pokemon.mod_stats(pk_bot)
 
@@ -242,6 +243,6 @@ pokem, rivals, mynames, lvlbott = start_game()
 # pokem = Litten
 # rivals = 'Beck'
 # mynames = 'Raphinha'
-# lvlbot = 60
+# lvlbott = 5
 
 fight(pokem, bot_poke(), rivals, mynames, lvlbott)
