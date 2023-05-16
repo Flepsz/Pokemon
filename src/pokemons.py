@@ -92,7 +92,7 @@ class Pokemon:
         if acertou == 1:
             msg = mod_tipo[0]
             return damage, msg
-        elif acertou == 2:
+        if acertou == 2:
             msg = 'A critical hit!'
             damage *= 2
             return damage, msg
@@ -115,7 +115,7 @@ class Pokemon:
         Mostra a vida em barras dinamicamente.
         """
         bar_full = int((self.hp / self.hpmax) * 20)
-        bar_hp = (chr(0x2588) * bar_full)
+        bar_hp = chr(0x2588) * bar_full
         bar_msng = chr(0x2591) * (20 - bar_full)
         bar = bar_hp + bar_msng
         return bar
@@ -125,10 +125,7 @@ class Pokemon:
         """
         Verifica se o pokemon foi morto ou não.
         """
-        if pk_bot.hp <= 0:
-            return True
-        else:
-            return False
+        return bool(pk_bot.hp <= 0)
 
     @staticmethod
     def run():
@@ -162,6 +159,11 @@ class PokemonFire(Pokemon):
         self.effect = str
 
     def mod_stats(self, pk_bot):
+        """
+        Função que determina o modificador de tipo, ou seja, a vantagem daquele pokemon contra algum elemento(status).
+        :param pk_bot: Pokemon do bot
+        :return: Status do modificador de tipo
+        """
         if pk_bot.type == "Grass":
             pk_bot.attack /= 2
             pk_bot.defense /= 2
@@ -183,15 +185,19 @@ class PokemonFire(Pokemon):
             pk_bot.effect = 'Its not very effective...'
             return self.effect, pk_bot.effect
 
-        elif pk_bot.type == "Grass":
+        if pk_bot.type == "Grass":
             self.effect = 'Its super effective!'
             pk_bot.effect = 'Its not very effective...'
             return self.effect, pk_bot.effect
 
-        else:
+        if pk_bot.type == 'Water':
             self.effect = 'Its not very effective...'
             pk_bot.effect = 'Its super effective!'
             return self.effect, pk_bot.effect
+
+        self.effect = 'Its effective.'
+        pk_bot.effect = 'Its effective.'
+        return self.effect, pk_bot.effect
 
 
 class PokemonGrass(Pokemon):
@@ -204,11 +210,16 @@ class PokemonGrass(Pokemon):
         self.effect = str
 
     def mod_stats(self, pk_bot):
+        """
+        Função que determina o modificador de tipo, ou seja, a vantagem daquele pokemon contra algum elemento(status).
+        :param pk_bot: Pokemon do bot
+        :return: Status do modificador de tipo
+        """
         if pk_bot.type == "Water":
             pk_bot.attack /= 2
             pk_bot.defense /= 2
 
-        elif pk_bot.type == "Fire":
+        if pk_bot.type == "Fire":
             self.attack /= 2
             self.defense /= 2
         else:
@@ -216,24 +227,28 @@ class PokemonGrass(Pokemon):
 
     def mod_tipo(self, pk_bot):
         """
-        Função que determina o modificador de tipo, ou seja, a vantagem daquele pokemon contra algum elemento.
+        Função que determina o modificador de tipo, ou seja, a vantagem daquele pokemon contra algum elemento(texto).
         :param pk_bot: Pokemon do bot
-        :return: Modificador de tipo
+        :return: Texto do modificador de tipo
         """
         if self.type == pk_bot.type:
             self.effect = 'Its not very effective...'
             pk_bot.effect = 'Its not very effective...'
             return self.effect, pk_bot.effect
 
-        elif pk_bot.type == "Water":
+        if pk_bot.type == "Water":
             self.effect = 'Its super effective!'
             pk_bot.effect = 'Its not very effective...'
             return self.effect, pk_bot.effect
 
-        else:
+        if pk_bot.type == 'Fire':
             self.effect = 'Its not very effective...'
             pk_bot.effect = 'Its super effective!'
             return self.effect, pk_bot.effect
+
+        self.effect = 'Its effective.'
+        pk_bot.effect = 'Its effective.'
+        return self.effect, pk_bot.effect
 
 
 class PokemonWater(Pokemon):
@@ -246,11 +261,16 @@ class PokemonWater(Pokemon):
         self.effect = str
 
     def mod_stats(self, pk_bot):
+        """
+        Função que determina o modificador de tipo, ou seja, a vantagem daquele pokemon contra algum elemento(status).
+        :param pk_bot: Pokemon do bot
+        :return: Status do modificador de tipo
+        """
         if pk_bot.type == "Fire":
             pk_bot.attack /= 2
             pk_bot.defense /= 2
 
-        elif pk_bot.type == "Grass":
+        if pk_bot.type == "Grass":
             self.attack /= 2
             self.defense /= 2
         else:
@@ -267,21 +287,30 @@ class PokemonWater(Pokemon):
             pk_bot.effect = 'Its not very effective...'
             return self.effect, pk_bot.effect
 
-        elif pk_bot.type == "Fire":
+        if pk_bot.type == "Fire":
             self.effect = 'Its super effective!'
             pk_bot.effect = 'Its not very effective...'
             return self.effect, pk_bot.effect
 
-        else:
+        if pk_bot.type == 'Grass':
             self.effect = 'Its not very effective...'
             pk_bot.effect = 'Its super effective!'
             return self.effect, pk_bot.effect
 
+        self.effect = 'Its effective.'
+        pk_bot.effect = 'Its effective.'
+        return self.effect, pk_bot.effect
 
-Litten = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, {'LVL': 5, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70})
-Rowlet = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 5, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
-Popplio = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, {'LVL': 5, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40})
 
-Littenbot = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, {'LVL': 5, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70})
-Rowletbot = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, {'LVL': 5, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42})
-Poppliobot = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, {'LVL': 5, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40})
+# Construindo os objetos de pokemons com seus status.
+litten_stats = {'LVL': 5, 'HPMAX': 45, 'HP': 45, 'AttackBase': 65, 'Attack': 65, 'Defense': 40, 'Speed': 70}
+rowlet_stats = {'LVL': 5, 'HPMAX': 68, 'HP': 68, 'AttackBase': 55, 'Attack': 55, 'Defense': 55, 'Speed': 42}
+popplio_stats = {'LVL': 5, 'HPMAX': 50, 'HP': 50, 'AttackBase': 54, 'Attack': 54, 'Defense': 54, 'Speed': 40}
+
+Litten = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, litten_stats)
+Rowlet = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, rowlet_stats)
+Popplio = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, popplio_stats)
+
+Littenbot = PokemonFire('Litten', {'Name': 'Ember', 'Power': 40}, litten_stats)
+Rowletbot = PokemonGrass('Rowlet', {'Name': 'Leafage', 'Power': 40}, rowlet_stats)
+Poppliobot = PokemonWater('Popplio', {'Name': 'Water Gun', 'Power': 40}, popplio_stats)
